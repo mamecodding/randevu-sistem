@@ -20,7 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
 
     const success = await login(email, password);
     if (!success) {
-      setError('Invalid email or password');
+      setError('Geçersiz e-posta veya şifre');
     }
     setLoading(false);
   };
@@ -33,10 +33,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
             <BookOpen className="h-12 w-12 text-blue-600" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Welcome to EduTutor
+            EduTutor'a Hoş Geldiniz
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Sign in to your account
+            Hesabınıza giriş yapın
           </p>
         </div>
         
@@ -50,7 +50,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
             
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+                E-posta adresi
               </label>
               <div className="mt-1 relative">
                 <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -61,14 +61,14 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your email"
+                  placeholder="E-posta adresinizi girin"
                 />
               </div>
             </div>
             
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                Şifre
               </label>
               <div className="mt-1 relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -79,7 +79,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your password"
+                  placeholder="Şifrenizi girin"
                 />
               </div>
             </div>
@@ -90,7 +90,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               <LogIn className="h-5 w-5 mr-2" />
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
             </button>
             
             <div className="text-center">
@@ -99,19 +99,19 @@ const LoginForm: React.FC<LoginFormProps> = ({ onToggleMode }) => {
                 onClick={onToggleMode}
                 className="text-blue-600 hover:text-blue-500 text-sm font-medium"
               >
-                Don't have an account? Sign up
+                Hesabınız yok mu? Kayıt olun
               </button>
             </div>
           </div>
           
           {/* Demo accounts */}
           <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="text-sm font-medium text-gray-700 mb-2">Demo Accounts:</h3>
+            <h3 className="text-sm font-medium text-gray-700 mb-2">Demo Hesapları:</h3>
             <div className="text-xs text-gray-600 space-y-1">
-              <p><strong>Admin:</strong> admin@school.edu</p>
-              <p><strong>Teacher:</strong> sarah@school.edu</p>
-              <p><strong>Student:</strong> john@student.edu</p>
-              <p className="text-gray-500 mt-1">Password: any text</p>
+              <p><strong>Yönetici:</strong> admin@school.edu</p>
+              <p><strong>Öğretmen:</strong> sarah@school.edu</p>
+              <p><strong>Öğrenci:</strong> john@student.edu</p>
+              <p className="text-gray-500 mt-1">Şifre: herhangi bir metin</p>
             </div>
           </div>
         </form>

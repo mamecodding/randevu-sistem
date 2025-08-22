@@ -22,7 +22,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
 
     const success = await signup(name, email, password, role);
     if (!success) {
-      setError('Email already exists or signup failed');
+      setError('E-posta zaten mevcut veya kayıt başarısız');
     }
     setLoading(false);
   };
@@ -35,10 +35,10 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
             <BookOpen className="h-12 w-12 text-green-600" />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Join EduTutor
+            EduTutor'a Katılın
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Create your account to get started
+            Başlamak için hesabınızı oluşturun
           </p>
         </div>
         
@@ -52,7 +52,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
             
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name
+                Ad Soyad
               </label>
               <div className="mt-1 relative">
                 <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -63,14 +63,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your full name"
+                  placeholder="Ad ve soyadınızı girin"
                 />
               </div>
             </div>
             
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+                E-posta adresi
               </label>
               <div className="mt-1 relative">
                 <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -81,14 +81,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your email"
+                  placeholder="E-posta adresinizi girin"
                 />
               </div>
             </div>
             
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                Şifre
               </label>
               <div className="mt-1 relative">
                 <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
@@ -99,14 +99,14 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
-                  placeholder="Enter your password"
+                  placeholder="Şifrenizi girin"
                 />
               </div>
             </div>
             
             <div>
               <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-                I am a
+                Ben bir
               </label>
               <select
                 id="role"
@@ -114,8 +114,8 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
                 onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
                 className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm"
               >
-                <option value="Student">Student</option>
-                <option value="Teacher">Teacher</option>
+                <option value="Student">Öğrenci</option>
+                <option value="Teacher">Öğretmen</option>
               </select>
             </div>
             
@@ -125,7 +125,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               <UserPlus className="h-5 w-5 mr-2" />
-              {loading ? 'Creating account...' : 'Sign up'}
+              {loading ? 'Hesap oluşturuluyor...' : 'Kayıt Ol'}
             </button>
             
             <div className="text-center">
@@ -134,7 +134,7 @@ const SignupForm: React.FC<SignupFormProps> = ({ onToggleMode }) => {
                 onClick={onToggleMode}
                 className="text-green-600 hover:text-green-500 text-sm font-medium"
               >
-                Already have an account? Sign in
+                Zaten hesabınız var mı? Giriş yapın
               </button>
             </div>
           </div>

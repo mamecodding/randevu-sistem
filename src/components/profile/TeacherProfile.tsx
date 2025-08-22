@@ -15,7 +15,7 @@ const TeacherProfile: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // In a real app, this would make an API call to update the profile
-    alert('Profile updated successfully!');
+    alert('Profil başarıyla güncellendi!');
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -26,8 +26,8 @@ const TeacherProfile: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900">Profile Settings</h2>
-        <p className="mt-2 text-gray-600">Update your teaching profile information</p>
+        <h2 className="text-2xl font-bold text-gray-900">Profil Ayarları</h2>
+        <p className="mt-2 text-gray-600">Öğretim profil bilgilerinizi güncelleyin</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -39,7 +39,7 @@ const TeacherProfile: React.FC = () => {
                 <User className="h-12 w-12 text-gray-600" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900">{user?.name}</h3>
-              <p className="text-gray-600">{formData.branch || 'Subject not set'}</p>
+              <p className="text-gray-600">{formData.branch || 'Konu ayarlanmamış'}</p>
               
               {teacherProfile && (
                 <div className="mt-4 pt-4 border-t border-gray-200">
@@ -50,7 +50,7 @@ const TeacherProfile: React.FC = () => {
                       ))}
                     </div>
                     <span className="text-sm text-gray-600">
-                      {teacherProfile.rating} ({teacherProfile.totalReviews} reviews)
+                      {teacherProfile.rating} ({teacherProfile.totalReviews} değerlendirme)
                     </span>
                   </div>
                 </div>
@@ -63,13 +63,13 @@ const TeacherProfile: React.FC = () => {
         <div className="lg:col-span-2">
           <div className="bg-white rounded-lg shadow-md border border-gray-200">
             <div className="p-6 border-b border-gray-200">
-              <h3 className="text-lg font-semibold text-gray-900">Edit Profile</h3>
+              <h3 className="text-lg font-semibold text-gray-900">Profili Düzenle</h3>
             </div>
             
             <form onSubmit={handleSubmit} className="p-6 space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
+                  Ad
                 </label>
                 <input
                   type="text"
@@ -78,12 +78,12 @@ const TeacherProfile: React.FC = () => {
                   disabled
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
                 />
-                <p className="text-xs text-gray-500 mt-1">Name cannot be changed</p>
+                <p className="text-xs text-gray-500 mt-1">Ad değiştirilemez</p>
               </div>
 
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
+                  E-posta
                 </label>
                 <input
                   type="email"
@@ -92,12 +92,12 @@ const TeacherProfile: React.FC = () => {
                   disabled
                   className="w-full px-3 py-2 border border-gray-300 rounded-md bg-gray-50 text-gray-500 cursor-not-allowed"
                 />
-                <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
+                <p className="text-xs text-gray-500 mt-1">E-posta değiştirilemez</p>
               </div>
 
               <div>
                 <label htmlFor="branch" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject/Branch
+                  Konu/Dal
                 </label>
                 <input
                   type="text"
@@ -106,13 +106,13 @@ const TeacherProfile: React.FC = () => {
                   value={formData.branch}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                  placeholder="e.g., Mathematics, Physics, Chemistry"
+                  placeholder="örn. Matematik, Fizik, Kimya"
                 />
               </div>
 
               <div>
                 <label htmlFor="bio" className="block text-sm font-medium text-gray-700 mb-2">
-                  Bio
+                  Biyografi
                 </label>
                 <textarea
                   id="bio"
@@ -121,7 +121,7 @@ const TeacherProfile: React.FC = () => {
                   value={formData.bio}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none"
-                  placeholder="Tell students about your expertise, teaching style, and experience..."
+                  placeholder="Öğrencilere uzmanlığınız, öğretim tarzınız ve deneyiminiz hakkında bilgi verin..."
                 />
               </div>
 
@@ -131,7 +131,7 @@ const TeacherProfile: React.FC = () => {
                   className="flex items-center px-6 py-3 bg-green-600 text-white font-medium rounded-md hover:bg-green-700 transition-colors duration-200"
                 >
                   <Save className="h-5 w-5 mr-2" />
-                  Save Changes
+                  Değişiklikleri Kaydet
                 </button>
               </div>
             </form>

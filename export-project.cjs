@@ -10,14 +10,14 @@ const archive = archiver('zip', {
 
 // Listen for all archive data to be written
 output.on('close', function() {
-  console.log('Archive created successfully!');
-  console.log(archive.pointer() + ' total bytes');
+  console.log('Arşiv başarıyla oluşturuldu!');
+  console.log(archive.pointer() + ' toplam byte');
 });
 
 // Good practice to catch warnings (ie stat failures and other non-blocking errors)
 archive.on('warning', function(err) {
   if (err.code === 'ENOENT') {
-    console.warn('Warning:', err);
+    console.warn('Uyarı:', err);
   } else {
     throw err;
   }

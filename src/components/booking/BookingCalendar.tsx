@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { mockAvailability, mockAppointments, mockUsers } from '../../data/mockData';
+import { dataService } from '../../services/dataService';
 import { ChevronLeft, ChevronRight, Clock, Check } from 'lucide-react';
 import BookingModal from './BookingModal';
 
@@ -13,9 +13,31 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedSlot, setSelectedSlot] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [teacher, setTeacher] = useState<any>(null);
+  const [availability, setAvailability] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const teacher = mockUsers.find(u => u.id === teacherId);
-  const teacherAvailability = mockAvailability.filter(av => av.teacherId === teacherId);
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [teacherData, availabilityData] = await Promise.all([
+          dataService.getUserById(teacherId),
+          dataService.getAvailabilityByTeacherId(teacherId)
+        ]);
+        
+        setTeacher(teacherData);
+        setAvailability(availabilityData);
+      } catch (error) {
+        console.error('Failed to load booking data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadData();
+  }, [teacherId]);
+
+  const teacherAvailability = availability;
 
   const navigateMonth = (direction: number) => {
     const newDate = new Date(currentDate);
@@ -63,9 +85,20 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
 
   const days = getDaysInMonth();
   const monthNames = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'
   ];
+
+  if (loading) {
+    return (
+      <div className="p-6">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Randevu verileri yükleniyor...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
@@ -92,7 +125,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
 
       {/* Calendar Grid */}
       <div className="grid grid-cols-7 gap-1 mb-4">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+        {['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'].map(day => (
           <div key={day} className="p-2 text-center text-sm font-medium text-gray-500">
             {day}
           </div>
@@ -128,12 +161,12 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
                       className="w-full text-xs bg-green-100 text-green-800 px-2 py-1 rounded hover:bg-green-200 transition-colors duration-200"
                       disabled={user?.role !== 'Student'}
                     >
-                      {new Date(slot.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      {new Date(slot.startTime).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
                     </button>
                   ))}
                   {availableSlots.length > 3 && (
                     <div className="text-xs text-gray-500 text-center">
-                      +{availableSlots.length - 3} more
+                      +{availableSlots.length - 3} tane daha
                     </div>
                   )}
                 </div>
@@ -146,7 +179,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
       {user?.role !== 'Student' && (
         <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-md">
           <p className="text-sm text-yellow-800">
-            Only students can book appointments. Please log in with a student account to book sessions.
+            Sadece öğrenciler randevu alabilir. Seans ayarlamak için lütfen öğrenci hesabıyla giriş yapın.
           </p>
         </div>
       )}
@@ -161,7 +194,7 @@ const BookingCalendar: React.FC<BookingCalendarProps> = ({ teacherId }) => {
           }}
           onConfirm={() => {
             // Handle booking confirmation
-            alert('Appointment booked successfully!');
+            alert('Randevu başarıyla alındı!');
             setShowBookingModal(false);
             setSelectedSlot(null);
           }}

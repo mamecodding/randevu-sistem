@@ -25,7 +25,7 @@ const AppointmentList: React.FC = () => {
 
   const handleCancelAppointment = (appointmentId: string) => {
     // In a real app, this would make an API call
-    alert('Appointment cancelled successfully!');
+    alert('Randevu başarıyla iptal edildi!');
   };
 
   const handleLeaveFeedback = (appointmentId: string) => {
@@ -44,7 +44,7 @@ const AppointmentList: React.FC = () => {
                 {user?.role === 'Student' ? appointment.teacherName : appointment.studentName}
               </h3>
               <p className="text-sm text-gray-600">
-                {user?.role === 'Student' ? appointment.teacherBranch : 'Student'}
+                {user?.role === 'Student' ? appointment.teacherBranch : 'Öğrenci'}
               </p>
             </div>
           </div>
@@ -52,19 +52,19 @@ const AppointmentList: React.FC = () => {
           <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
             <div className="flex items-center space-x-2">
               <Calendar className="h-4 w-4" />
-              <span>{new Date(appointment.appointmentTime).toLocaleDateString()}</span>
+              <span>{new Date(appointment.appointmentTime).toLocaleDateString('tr-TR')}</span>
             </div>
             <div className="flex items-center space-x-2">
               <Clock className="h-4 w-4" />
               <span>
-                {new Date(appointment.appointmentTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                {new Date(appointment.appointmentTime).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
               </span>
             </div>
           </div>
 
           {appointment.subject && (
             <p className="text-sm text-gray-700 mb-3">
-              <strong>Topic:</strong> {appointment.subject}
+              <strong>Konu:</strong> {appointment.subject}
             </p>
           )}
 
@@ -73,7 +73,8 @@ const AppointmentList: React.FC = () => {
             appointment.status === 'Confirmed' ? 'bg-blue-100 text-blue-800' :
             'bg-red-100 text-red-800'
           }`}>
-            {appointment.status}
+            {appointment.status === 'Completed' ? 'Tamamlandı' : 
+             appointment.status === 'Confirmed' ? 'Onaylandı' : 'İptal Edildi'}
           </span>
         </div>
 
@@ -83,7 +84,7 @@ const AppointmentList: React.FC = () => {
               <button
                 onClick={() => handleCancelAppointment(appointment.id)}
                 className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors duration-200"
-                title="Cancel appointment"
+                title="Randevuyu iptal et"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -92,7 +93,7 @@ const AppointmentList: React.FC = () => {
               <button
                 onClick={() => handleLeaveFeedback(appointment.id)}
                 className="p-2 text-blue-600 hover:bg-blue-50 rounded-md transition-colors duration-200"
-                title="Leave feedback"
+                title="Geri bildirim bırak"
               >
                 <MessageSquare className="h-4 w-4" />
               </button>
@@ -106,8 +107,8 @@ const AppointmentList: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900">My Appointments</h2>
-        <p className="mt-2 text-gray-600">Manage your tutoring sessions</p>
+        <h2 className="text-2xl font-bold text-gray-900">Randevularım</h2>
+        <p className="mt-2 text-gray-600">Özel ders seanslarınızı yönetin</p>
       </div>
 
       {/* Tab Navigation */}
@@ -120,7 +121,7 @@ const AppointmentList: React.FC = () => {
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >
-          Upcoming ({upcomingAppointments.length})
+          Yaklaşan ({upcomingAppointments.length})
         </button>
         <button
           onClick={() => setActiveTab('past')}
@@ -130,7 +131,7 @@ const AppointmentList: React.FC = () => {
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >
-          Past ({pastAppointments.length})
+          Geçmiş ({pastAppointments.length})
         </button>
       </div>
 
@@ -149,8 +150,8 @@ const AppointmentList: React.FC = () => {
             ) : (
               <div className="text-center py-12">
                 <Calendar className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-500">No upcoming appointments</p>
-                <p className="text-sm text-gray-400 mt-1">Book a session to get started</p>
+                <p className="text-gray-500">Yaklaşan randevu bulunmuyor</p>
+                <p className="text-sm text-gray-400 mt-1">Başlamak için bir seans ayarlayın</p>
               </div>
             )}
           </>
@@ -169,8 +170,8 @@ const AppointmentList: React.FC = () => {
             ) : (
               <div className="text-center py-12">
                 <Clock className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-500">No past appointments</p>
-                <p className="text-sm text-gray-400 mt-1">Your completed sessions will appear here</p>
+                <p className="text-gray-500">Geçmiş randevu bulunmuyor</p>
+                <p className="text-sm text-gray-400 mt-1">Tamamlanan seanslarınız burada görünecek</p>
               </div>
             )}
           </>
@@ -186,7 +187,7 @@ const AppointmentList: React.FC = () => {
             setSelectedAppointment(null);
           }}
           onSubmit={(rating, comment) => {
-            alert('Feedback submitted successfully!');
+            alert('Geri bildirim başarıyla gönderildi!');
             setShowFeedbackModal(false);
             setSelectedAppointment(null);
           }}

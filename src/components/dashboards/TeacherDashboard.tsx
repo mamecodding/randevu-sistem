@@ -19,17 +19,17 @@ const TeacherDashboard: React.FC = () => {
   const teacherProfile = mockTeacherProfiles.find(profile => profile.userId === user?.id);
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Users },
-    { id: 'calendar', label: 'Manage Availability', icon: Calendar },
-    { id: 'appointments', label: 'My Appointments', icon: Clock },
-    { id: 'profile', label: 'Profile Settings', icon: Settings },
+    { id: 'overview', label: 'Genel Bakış', icon: Users },
+    { id: 'calendar', label: 'Müsaitlik Yönetimi', icon: Calendar },
+    { id: 'appointments', label: 'Randevularım', icon: Clock },
+    { id: 'profile', label: 'Profil Ayarları', icon: Settings },
   ];
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Welcome back, {user?.name}!</h1>
-        <p className="mt-2 text-gray-600">Manage your teaching schedule and connect with students.</p>
+        <h1 className="text-3xl font-bold text-gray-900">Tekrar hoş geldin, {user?.name}!</h1>
+        <p className="mt-2 text-gray-600">Öğretim programınızı yönetin ve öğrencilerle bağlantı kurun.</p>
       </div>
 
       {/* Tab Navigation */}
@@ -65,7 +65,7 @@ const TeacherDashboard: React.FC = () => {
                 <Calendar className="h-8 w-8 text-green-600" />
                 <div className="ml-4">
                   <p className="text-2xl font-bold text-gray-900">{upcomingAppointments.length}</p>
-                  <p className="text-gray-600">Upcoming Sessions</p>
+                  <p className="text-gray-600">Yaklaşan Seanslar</p>
                 </div>
               </div>
             </div>
@@ -75,7 +75,7 @@ const TeacherDashboard: React.FC = () => {
                 <Clock className="h-8 w-8 text-blue-600" />
                 <div className="ml-4">
                   <p className="text-2xl font-bold text-gray-900">{completedAppointments.length}</p>
-                  <p className="text-gray-600">Completed Sessions</p>
+                  <p className="text-gray-600">Tamamlanan Seanslar</p>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@ const TeacherDashboard: React.FC = () => {
                   <p className="text-2xl font-bold text-gray-900">
                     {new Set(myAppointments.map(app => app.studentId)).size}
                   </p>
-                  <p className="text-gray-600">Total Students</p>
+                  <p className="text-gray-600">Toplam Öğrenci</p>
                 </div>
               </div>
             </div>
@@ -97,7 +97,7 @@ const TeacherDashboard: React.FC = () => {
                 <Star className="h-8 w-8 text-yellow-600" />
                 <div className="ml-4">
                   <p className="text-2xl font-bold text-gray-900">{teacherProfile?.rating || 'N/A'}</p>
-                  <p className="text-gray-600">Average Rating</p>
+                  <p className="text-gray-600">Ortalama Puan</p>
                 </div>
               </div>
             </div>
@@ -107,7 +107,7 @@ const TeacherDashboard: React.FC = () => {
           <div className="lg:col-span-2">
             <div className="bg-white rounded-lg shadow-md border border-gray-200">
               <div className="p-6 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-900">Upcoming Sessions</h2>
+                <h2 className="text-lg font-semibold text-gray-900">Yaklaşan Seanslar</h2>
               </div>
               <div className="p-6">
                 {upcomingAppointments.length > 0 ? (
@@ -120,17 +120,17 @@ const TeacherDashboard: React.FC = () => {
                         </div>
                         <div className="text-right">
                           <p className="text-sm font-medium text-gray-900">
-                            {new Date(appointment.appointmentTime).toLocaleDateString()}
+                            {new Date(appointment.appointmentTime).toLocaleDateString('tr-TR')}
                           </p>
                           <p className="text-sm text-gray-600">
-                            {new Date(appointment.appointmentTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            {new Date(appointment.appointmentTime).toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
                           </p>
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500 text-center py-8">No upcoming sessions scheduled.</p>
+                  <p className="text-gray-500 text-center py-8">Planlanmış yaklaşan seans bulunmuyor.</p>
                 )}
               </div>
             </div>
@@ -140,7 +140,7 @@ const TeacherDashboard: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="bg-white rounded-lg shadow-md border border-gray-200">
               <div className="p-6 border-b border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-900">Quick Actions</h2>
+                <h2 className="text-lg font-semibold text-gray-900">Hızlı İşlemler</h2>
               </div>
               <div className="p-6 space-y-4">
                 <button
@@ -148,14 +148,14 @@ const TeacherDashboard: React.FC = () => {
                   className="w-full flex items-center justify-center px-4 py-3 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors duration-200"
                 >
                   <Calendar className="h-4 w-4 mr-2" />
-                  Manage Availability
+                  Müsaitlik Yönet
                 </button>
                 <button
                   onClick={() => setActiveTab('appointments')}
                   className="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 transition-colors duration-200"
                 >
                   <Clock className="h-4 w-4 mr-2" />
-                  View All Appointments
+                  Tüm Randevuları Görüntüle
                 </button>
               </div>
             </div>

@@ -14,7 +14,7 @@ const TeacherProfile: React.FC<TeacherProfileProps> = ({ teacherId, onBack }) =>
   const [showBooking, setShowBooking] = useState(false);
 
   if (!teacher || !profile) {
-    return <div>Teacher not found</div>;
+    return <div>Öğretmen bulunamadı</div>;
   }
 
   return (
@@ -24,7 +24,7 @@ const TeacherProfile: React.FC<TeacherProfileProps> = ({ teacherId, onBack }) =>
         className="flex items-center text-blue-600 hover:text-blue-700 transition-colors duration-200"
       >
         <ArrowLeft className="h-4 w-4 mr-2" />
-        Back to Teachers
+        Öğretmenlere Geri Dön
       </button>
 
       <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
@@ -45,14 +45,14 @@ const TeacherProfile: React.FC<TeacherProfileProps> = ({ teacherId, onBack }) =>
                   ))}
                 </div>
                 <span className="ml-2 text-gray-600">
-                  {profile.rating} ({profile.totalReviews} reviews)
+                  {profile.rating} ({profile.totalReviews} değerlendirme)
                 </span>
               </div>
             </div>
           </div>
 
           <div className="mt-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-3">About</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-3">Hakkında</h2>
             <p className="text-gray-700 leading-relaxed">{profile.bio}</p>
           </div>
 
@@ -62,7 +62,7 @@ const TeacherProfile: React.FC<TeacherProfileProps> = ({ teacherId, onBack }) =>
               className="flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 transition-colors duration-200"
             >
               <Calendar className="h-5 w-5 mr-2" />
-              {showBooking ? 'Hide Calendar' : 'Book Appointment'}
+              {showBooking ? 'Takvimi Gizle' : 'Randevu Al'}
             </button>
           </div>
         </div>
@@ -71,8 +71,8 @@ const TeacherProfile: React.FC<TeacherProfileProps> = ({ teacherId, onBack }) =>
       {showBooking && (
         <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
           <div className="p-6 border-b border-gray-200">
-            <h2 className="text-lg font-semibold text-gray-900">Available Times</h2>
-            <p className="text-gray-600">Select an available time slot to book your appointment</p>
+            <h2 className="text-lg font-semibold text-gray-900">Müsait Zamanlar</h2>
+            <p className="text-gray-600">Randevunuzu almak için müsait bir zaman dilimi seçin</p>
           </div>
           <BookingCalendar teacherId={teacherId} />
         </div>
